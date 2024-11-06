@@ -1,0 +1,18 @@
+services:
+  develop:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    cap_add:
+      - SYS_PTRACE  # for GDB exec
+    security_opt:
+      - seccomp=unconfined  # for GDB exec
+    stdin_open: true
+    tty: true
+    working_dir: /usr/src/app
+    # environment: 
+    #   -
+    volumes:
+      - type: bind
+        source: $PWD
+        target: /usr/src/app
